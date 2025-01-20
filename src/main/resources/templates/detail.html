@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        img {
+            display: block;
+            margin: 10px auto;
+            max-width: 100%;
+            height: auto;
+        }
+        button {
+            display: inline-block;
+            margin: 10px 5px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <th>ID</th>
+        <td th:text="${board.id}"></td>
+    </tr>
+    <tr>
+        <th>Title</th>
+        <td th:text="${board.boardTitle}"></td>
+    </tr>
+    <tr>
+        <th>Writer</th>
+        <td th:text="${board.boardWriter}"></td>
+    </tr>
+    <tr>
+        <th>Date</th>
+        <td th:text="${board.createdAt}"></td>
+    </tr>
+    <tr>
+        <th>Hits</th>
+        <td th:text="${board.boardHits}"></td>
+    </tr>
+    <tr>
+        <th>Contents</th>
+        <td th:text="${board.boardContents}"></td>
+    </tr>
+    <tr th:if="${board.fileAttached == 1}">
+        <th>Image</th>
+        <td th:each="boardFile: ${boardFileList}">
+            <img th:src="@{|/upload/${boardFile.storedFileName}|}" alt="Image">
+        </td>
+    </tr>
+</table>
+<div class="button-container">
+    <button onclick="listReq()">목록</button>
+    <button onclick="updateReq()">수정</button>
+    <button onclick="deleteReq()">삭제</button>
+</div>
+<script th:inline="javascript">
+    const listReq = () => {
+        location.href = "/list";
+    }
+    const updateReq = () => {
+        location.href = `/update/[[${board.id}]]`;
+    }
+    const deleteReq = () => {
+        location.href = `/delete/[[${board.id}]]`;
+    }
+</script>
+</body>
+</html>
