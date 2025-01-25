@@ -20,8 +20,7 @@ DB 연동시(뒷부분에서 추가 예정)
 - MyBatis Framework
 - MySQL Driver
 
-## 강의 구성
-0. 소개 
+ 
 1. 프로젝트 세팅
 2. 시작페이지 출력, devtools 적용
 3. service, repository, DTO class 작성, lombok 설치
